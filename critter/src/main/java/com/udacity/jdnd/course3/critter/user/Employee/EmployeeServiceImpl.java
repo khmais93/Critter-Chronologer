@@ -6,12 +6,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService{
 
     EmployeeRepository employeeRepository;

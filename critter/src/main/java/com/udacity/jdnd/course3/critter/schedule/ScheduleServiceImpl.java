@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.udacity.jdnd.course3.critter.pet.Pet;
 import com.udacity.jdnd.course3.critter.user.Customer.Customer;
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
+@Transactional
 public class ScheduleServiceImpl implements ScheduleService{
 
     ScheduleRepository scheduleRepository;

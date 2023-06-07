@@ -3,6 +3,7 @@ package com.udacity.jdnd.course3.critter.pet;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.udacity.jdnd.course3.critter.user.Customer.Customer;
 import com.udacity.jdnd.course3.critter.user.Customer.CustomerRepository;
@@ -10,6 +11,7 @@ import com.udacity.jdnd.course3.critter.user.Customer.CustomerRepository;
 import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
+@Transactional
 public class PetServiceImpl implements PetService {
 
     PetRepository petRepository;
