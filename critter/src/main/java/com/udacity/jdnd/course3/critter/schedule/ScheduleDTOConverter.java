@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.udacity.jdnd.course3.critter.pet.Pet;
 import com.udacity.jdnd.course3.critter.pet.PetService;
+import com.udacity.jdnd.course3.critter.shared.BaseEntityMapper;
 import com.udacity.jdnd.course3.critter.user.Employee.Employee;
 import com.udacity.jdnd.course3.critter.user.Employee.EmployeeService;
 
@@ -15,12 +16,13 @@ import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
-public class ScheduleDTOConverter {
+public class ScheduleDTOConverter implements BaseEntityMapper<ScheduleDTO, Schedule> {
 
     EmployeeService employeeService;
     PetService petService;
 
-    public ScheduleDTO convertScheduleToDTO(Schedule schedule) {
+    @Override
+    public ScheduleDTO modelToDto(Schedule schedule) {
         ScheduleDTO scheduleDTO = new ScheduleDTO();
         BeanUtils.copyProperties(schedule, scheduleDTO);
 
@@ -33,7 +35,8 @@ public class ScheduleDTOConverter {
         return scheduleDTO;
     }
 
-    public Schedule convertDTOToSchedule(ScheduleDTO scheduleDTO) {
+    @Override
+    public Schedule dtoToModel(ScheduleDTO scheduleDTO) {
         Schedule schedule = new Schedule();
         BeanUtils.copyProperties(scheduleDTO, schedule);
 

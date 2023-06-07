@@ -35,41 +35,41 @@ public class UserController {
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-        return customerDTOConverter.convertCustomerToDTO(customerService.saveCustomer(customerDTOConverter.convertDTOToCustomer(customerDTO)));
+        return customerDTOConverter.modelToDto(customerService.saveCustomer(customerDTOConverter.dtoToModel(customerDTO)));
     }
 
     @GetMapping("/customer")
     public List<CustomerDTO> getAllCustomers(){
         return customerService.getAllCustomers().stream()
-                .map(customerDTOConverter::convertCustomerToDTO)
+                .map(customerDTOConverter::modelToDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/customer/{customerId}")
     public CustomerDTO getCustomer(@PathVariable Long customerId){
-        return customerDTOConverter.convertCustomerToDTO(customerService.getCustomerById(customerId));
+        return customerDTOConverter.modelToDto(customerService.getCustomerById(customerId));
     }
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
-        return customerDTOConverter.convertCustomerToDTO(customerService.getCustomerByPetsId(petId));
+        return customerDTOConverter.modelToDto(customerService.getCustomerByPetsId(petId));
     }
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        return employeeDTOConverter.convertEmployeeToDTO(employeeService.saveEmployee(employeeDTOConverter.convertDTOToEmployee(employeeDTO)));
+        return employeeDTOConverter.modelToDto(employeeService.saveEmployee(employeeDTOConverter.dtoToModel(employeeDTO)));
     }
 
     @GetMapping("/employee")
     public List<EmployeeDTO> getAllEmployees()  {
         return employeeService.getAllEmployees().stream()
-        .map(employeeDTOConverter::convertEmployeeToDTO)
+        .map(employeeDTOConverter::modelToDto)
         .collect(Collectors.toList());
     }
     
     @GetMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
-        return employeeDTOConverter.convertEmployeeToDTO(employeeService.getEmployee(employeeId));
+        return employeeDTOConverter.modelToDto(employeeService.getEmployee(employeeId));
     }
 
     @PutMapping("/employee/{employeeId}")
@@ -80,7 +80,7 @@ public class UserController {
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
         return employeeService.findEmployeesForService(employeeDTO).stream()
-        .map(employeeDTOConverter::convertEmployeeToDTO)
+        .map(employeeDTOConverter::modelToDto)
         .collect(Collectors.toList());
     }
 

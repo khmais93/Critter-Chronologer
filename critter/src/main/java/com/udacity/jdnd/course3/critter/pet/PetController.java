@@ -23,21 +23,21 @@ public class PetController {
 
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
-        return petDTOConverter.convertPetToDTO(petService.savePet(petDTOConverter.convertDTOToPet(petDTO)));
+        return petDTOConverter.modelToDto(petService.savePet(petDTOConverter.dtoToModel(petDTO)));
     }
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable long petId) {
-        return petDTOConverter.convertPetToDTO(petService.getPet(petId));
+        return petDTOConverter.modelToDto(petService.getPet(petId));
     }
 
     @GetMapping
     public List<PetDTO> getPets(){
-        return petService.getPets().stream().map(petDTOConverter::convertPetToDTO).collect(Collectors.toList());
+        return petService.getPets().stream().map(petDTOConverter::modelToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/owner/{ownerId}")
     public List<PetDTO> getPetsByOwner(@PathVariable long ownerId) {
-        return petService.getPetsByOwner(ownerId).stream().map(petDTOConverter::convertPetToDTO).collect(Collectors.toList());
+        return petService.getPetsByOwner(ownerId).stream().map(petDTOConverter::modelToDto).collect(Collectors.toList());
     }
 }

@@ -37,11 +37,6 @@ public class ScheduleServiceImpl implements ScheduleService{
     public List<Schedule> getScheduleForCustomer(Long customerId) {
         Customer customer = customerService.getCustomerById(customerId);
         List<Pet> pets = customer.getPets();
-
-        // for(Pet pet : pets){
-        //     List<Schedule> schedule = scheduleRepository.findScheduleByPetsId(pet.getId());
-        // }
-
         return pets.stream()
         .map(pet->scheduleRepository.findScheduleByPetsId(pet.getId()))
         .flatMap(List::stream)

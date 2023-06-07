@@ -20,34 +20,34 @@ public class ScheduleController {
 
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
-        return scheduleDTOConverter.convertScheduleToDTO(scheduleService.createSchedule(scheduleDTOConverter.convertDTOToSchedule(scheduleDTO)));
+        return scheduleDTOConverter.modelToDto(scheduleService.createSchedule(scheduleDTOConverter.dtoToModel(scheduleDTO)));
     }
 
     @GetMapping
     public List<ScheduleDTO> getAllSchedules() {
         return scheduleService.getAllSchedules().stream()
-        .map(scheduleDTOConverter::convertScheduleToDTO)
+        .map(scheduleDTOConverter::modelToDto)
         .collect(Collectors.toList());
     }
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
         return scheduleService.getScheduleForPet(petId).stream()
-                .map(scheduleDTOConverter::convertScheduleToDTO)
+                .map(scheduleDTOConverter::modelToDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
         return scheduleService.getScheduleForEmployee(employeeId).stream()
-                .map(scheduleDTOConverter::convertScheduleToDTO)
+                .map(scheduleDTOConverter::modelToDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/customer/{customerId}")
     public List<ScheduleDTO> getScheduleForCustomer(@PathVariable long customerId) {
         return scheduleService.getScheduleForCustomer(customerId).stream()
-                .map(scheduleDTOConverter::convertScheduleToDTO)
+                .map(scheduleDTOConverter::modelToDto)
                 .collect(Collectors.toList());
     }
 }

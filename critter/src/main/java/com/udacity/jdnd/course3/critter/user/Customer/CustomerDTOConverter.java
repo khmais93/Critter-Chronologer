@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.udacity.jdnd.course3.critter.pet.Pet;
 import com.udacity.jdnd.course3.critter.pet.PetService;
+import com.udacity.jdnd.course3.critter.shared.BaseEntityMapper;
 
 import lombok.AllArgsConstructor;
 
@@ -15,11 +16,12 @@ import java.util.List;
  */
 @AllArgsConstructor
 @Service
-public class CustomerDTOConverter {
+public class CustomerDTOConverter implements BaseEntityMapper<CustomerDTO, Customer> {
 
     PetService petService;
 
-    public CustomerDTO convertCustomerToDTO(Customer customer){
+    @Override
+    public CustomerDTO modelToDto(Customer customer){
         CustomerDTO customerDTO = new CustomerDTO();
         BeanUtils.copyProperties(customer, customerDTO);
 
@@ -34,7 +36,8 @@ public class CustomerDTOConverter {
         return customerDTO;
     }
 
-    public Customer convertDTOToCustomer(CustomerDTO customerDTO){
+    @Override
+    public Customer dtoToModel(CustomerDTO customerDTO){
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDTO, customer);
 

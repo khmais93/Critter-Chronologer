@@ -2,11 +2,7 @@ package com.udacity.jdnd.course3.critter.user.Employee;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 

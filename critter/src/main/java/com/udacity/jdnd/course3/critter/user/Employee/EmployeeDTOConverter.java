@@ -3,16 +3,20 @@ package com.udacity.jdnd.course3.critter.user.Employee;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
-@Component
-public class EmployeeDTOConverter {
-    public EmployeeDTO convertEmployeeToDTO(Employee employee) {
+import com.udacity.jdnd.course3.critter.shared.BaseEntityMapper;
 
+@Component
+public class EmployeeDTOConverter implements BaseEntityMapper<EmployeeDTO, Employee> {
+
+    @Override
+    public EmployeeDTO modelToDto(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         BeanUtils.copyProperties(employee, employeeDTO);
         return employeeDTO;
     }
 
-    public Employee convertDTOToEmployee(EmployeeDTO employeeDTO){
+    @Override
+    public Employee dtoToModel(EmployeeDTO employeeDTO){
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
         return employee;
