@@ -10,6 +10,6 @@ public interface EmployeeService {
     List<Employee> getAllEmployees();
     Employee getEmployee(Long employeeId);
     void setAvailability(Set<DayOfWeek> daysAvailable, long employeeId);
-    List<EmployeeDTO> findEmployeesForService(EmployeeRequestDTO employeeDTO);
+    List<Employee> findEmployeesForService(EmployeeRequestDTO employeeDTO);
 
 }

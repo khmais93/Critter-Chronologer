@@ -1,8 +1,14 @@
 package com.udacity.jdnd.course3.critter.user.Employee;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -15,9 +21,13 @@ public class EmployeeServiceImpl implements EmployeeService{
     EmployeeRepository employeeRepository;
 
     @Override
-    public List<EmployeeDTO> findEmployeesForService(EmployeeRequestDTO employeeDTO) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Employee> findEmployeesForService(EmployeeRequestDTO employeeDTO) {
+        Set<EmployeeSkill> skills = employeeDTO.getSkills();
+        LocalDate date = employeeDTO.getDate();
+        List<Employee> employees = employeeRepository.findByDaysAvailable(date.getDayOfWeek());
+        return employees.stream()
+        .filter(employee -> employee.getSkills().containsAll(skills))
+        .collect(Collectors.toList());
     }
 
     @Override

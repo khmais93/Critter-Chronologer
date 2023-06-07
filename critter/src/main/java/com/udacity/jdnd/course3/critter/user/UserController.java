@@ -1,13 +1,10 @@
 package com.udacity.jdnd.course3.critter.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.udacity.jdnd.course3.critter.pet.Pet;
 import com.udacity.jdnd.course3.critter.user.Customer.CustomerDTO;
 import com.udacity.jdnd.course3.critter.user.Customer.CustomerDTOConverter;
 import com.udacity.jdnd.course3.critter.user.Customer.CustomerService;
-import com.udacity.jdnd.course3.critter.user.Employee.Employee;
 import com.udacity.jdnd.course3.critter.user.Employee.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.user.Employee.EmployeeDTOConverter;
 import com.udacity.jdnd.course3.critter.user.Employee.EmployeeRequestDTO;
@@ -82,7 +79,9 @@ public class UserController {
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        return employeeService.findEmployeesForService(employeeDTO).stream()
+        .map(employeeDTOConverter::convertEmployeeToDTO)
+        .collect(Collectors.toList());
     }
 
 }

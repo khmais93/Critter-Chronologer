@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -33,16 +32,22 @@ public class ScheduleController {
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+        return scheduleService.getScheduleForPet(petId).stream()
+                .map(scheduleDTOConverter::convertScheduleToDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        return scheduleService.getScheduleForEmployee(employeeId).stream()
+                .map(scheduleDTOConverter::convertScheduleToDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/customer/{customerId}")
     public List<ScheduleDTO> getScheduleForCustomer(@PathVariable long customerId) {
-        throw new UnsupportedOperationException();
+        return scheduleService.getScheduleForCustomer(customerId).stream()
+                .map(scheduleDTOConverter::convertScheduleToDTO)
+                .collect(Collectors.toList());
     }
 }
